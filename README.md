@@ -143,6 +143,55 @@ We can now start a virtual machine:
 lein with-profile pallet pallet up --phases install
 ```
 
+
+## Running on VirtualBox
+[project.clj](step-3b-with-ec2/project.clj) &#xb7;
+[pallet.clj](step-3b-with-ec2/pallet.clj) &#xb7;
+
+To run this on VirtualBox, we'll need to add some dependencies and install a VM model.
+
+The dependencies we need are for the pallet-vmfest provider, and the jclouds
+providers that it uses.
+
+The extra dependencies for the `:pallet` profile are:
+
+```clj
+[com.palletops/pallet-vmfest "0.3.0-alpha.5"]
+[com.palletops/pallet-jclouds "1.5.3"]
+[org.jclouds/jclouds-all "1.5.5"]
+[org.jclouds.driver/jclouds-slf4j "1.5.5"
+;; the declared version is old and can overrule the
+;; resolved version
+:exclusions [org.slf4j/slf4j-api]]
+[org.jclouds.driver/jclouds-sshj "1.5.5"]
+```
+
+Next we need to get the VM model properly installed so our virtualbox adapter,
+pallet-vmfest, can treat it just like any other cloud provider.
+
+To install a VM model, please follow the instructions found [here][pallet-vmfest].
+
+We also need to tell pallet what sort of nodes we want.  We can do this in the
+`pallet.clj` file.
+
+```clj
+(defproject webapp
+  :provider {:vmfest
+             {:node-spec
+              {:image {:os-family :ubuntu
+                       :os-version-matches "13.04"
+                       :os-64-bit? true}
+               :network {:incoming-ports [22 3000]}}}}
+  :groups [webserver])
+```
+
+We can now start a virtual machine:
+
+```
+lein with-profile pallet pallet up --phases install
+```
+
+
 ## Adding a Deploy from Leiningen Built Jars
 [project.clj](step-4-with-deploy-from-lein/project.clj) &#xb7;
 [pallet.clj](step-4-with-deploy-from-lein/pallet.clj) &#xb7;
@@ -221,3 +270,5 @@ lein with-profile pallet pallet up --phases deploy :from-maven-repo
 
 By default, the deploy will use the `:repositories` defined in your leiningen
 configuration to resolve the artifacts.
+
+[pallet-vmfest]: https://github.com/pallet/pallet-vmfest/ "Pallet VirtualBox bridge"

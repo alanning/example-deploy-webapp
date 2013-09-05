@@ -164,13 +164,13 @@ To actually deploy our webapp, we now add in the `app-deploy-crate` into the
                 {:from-lein
                  [{:project-path "target/webapp-%s-standalone.jar"
                    :path "webapp.jar"}]}
-                :run-command "java -jar /opt/my-webapp/webapp.jar"}
+                :run-command "java -jar /opt/webapp.jar"}
                :instance-id :my-webapp)]))
 ```
 
 This tells pallet that we want to deploy a single artifact from the leiningen
 built target `target/webapp-%s-standalone.jar` file, where the "%s" will be
-replaced by the project version, to `/opt/my-webapp/webapp.jar`, and create a
+replaced by the project version, to `/opt/webapp.jar`, and create a
 `runit` service to run it.
 
 We can now deploy using:

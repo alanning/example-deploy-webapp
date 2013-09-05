@@ -176,7 +176,7 @@ replaced by the project version, to `/opt/webapp.jar`, and create a
 We can now deploy using:
 
 ```
-lein uberjar
+lein ring uberjar
 lein with-profile pallet pallet up --phases configure,deploy
 ```
 

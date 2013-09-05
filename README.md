@@ -56,10 +56,10 @@ profile, so they do not interfere with the base project dependencies.
             [com.palletops/pallet-lein "0.6.0-beta.9"]]
   :ring {:handler webapp.core/routes}
   :profiles {:pallet {:dependencies
-                      [[com.palletops/pallet "0.8.0-beta.9"]
+                      [[com.palletops/pallet "0.8.0-RC.1"]
                        [com.palletops/java-crate "0.8.0-beta.4"]
                        [com.palletops/runit-crate "0.8.0-alpha.1"]
-                       [com.palletops/app-deploy-crate "0.1.0-SNAPSHOT"]
+                       [com.palletops/app-deploy-crate "0.8.0-alpha.3"]
                        [ch.qos.logback/logback-classic "1.0.9"]
                        [org.slf4j/jcl-over-slf4j "1.7.3"]]}
              :exclusions [commons-logging]})
@@ -107,7 +107,7 @@ providers that it uses.
 The extra dependencies for the `:pallet` profile are:
 
 ```clj
-[org.cloudhoist/pallet-jclouds "1.5.2"]
+[org.cloudhoist/pallet-jclouds "1.5.3"]
 [org.jclouds/jclouds-all "1.5.5"]
 [org.jclouds.provider/jclouds-slf4j "1.5.5"]
 [org.jclouds.provider/jclouds-sshj "1.5.5"]

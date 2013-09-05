@@ -132,7 +132,7 @@ To tell pallet the credentials, we can run the add-service task in the lein
 pallet plugin:
 
 ```
-lein pallet add-service aws aws-ec2 YOUR-ACCESS-KEY YOUR-SECRET-KEY
+lein with-profile pallet pallet add-service aws aws-ec2 YOUR-ACCESS-KEY YOUR-SECRET-KEY
 ```
 
 This will create a `~/.pallet/services/aws.clj` file containing the keys.
@@ -140,7 +140,7 @@ This will create a `~/.pallet/services/aws.clj` file containing the keys.
 We can now start a virtual machine:
 
 ```
-lein pallet up --phases install
+lein with-profile pallet pallet up --phases install
 ```
 
 ## Adding a Deploy from Leiningen Built Jars
@@ -176,7 +176,8 @@ replaced by the project version, to `/opt/webapp.jar`, and create a
 We can now deploy using:
 
 ```
-lein do uberjar, pallet up --phases configure,deploy
+lein uberjar
+lein with-profile pallet pallet up --phases configure,deploy
 ```
 
 ## Adding a Deploy from a Maven Repository
@@ -215,7 +216,7 @@ Assuming we have a "0.1.0" release, deployed with `lein deploy`, we can use that
 artifact with:
 
 ```
-lein pallet up --phases deploy :from-maven-repo
+lein with-profile pallet pallet up --phases deploy :from-maven-repo
 ```
 
 By default, the deploy will use the `:repositories` defined in your leiningen
